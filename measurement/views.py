@@ -3,13 +3,13 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView
 from measurement.models import Sensor, Measurement
 import datetime
-from measurement.serializers import SensorDetailSerializer, MeasurementSerializer
+from measurement.serializers import SensorDetailSerializer, MeasurementSerializer, SensorSerializer
 from django.http import HttpResponse
 from rest_framework.response import Response
 
 
 # def create_measurement(request):
-#     Measurement(temperature=22.3, created_at=datetime.datetime.now().time()).save()
+#     Measurement(temperature=22.3, created_at=datetime.datetime.now().time(), sensor = 1).save()
 #     return HttpResponse("Все получилось!")
 #
 #
@@ -30,20 +30,21 @@ class AddMeasurement(CreateAPIView):
 
 
 class DemoView(ListCreateAPIView):
+    """
+            Информация по всем датчикам
+            """
     queryset = Sensor.objects.all()
     serializer_class = SensorDetailSerializer
 
-    # def post(self, request):
-    #     Measurement(temperature=22.3, created_at=datetime.datetime.now().time()).save()
-    #     measurements = Measurement.objects.all()
-    #     for measurement in measurements:
-    #         Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
-    #     return Response("Все получилось!")
+class ListSensor(ListCreateAPIView):
+    """
+    Список всех датчиков и создание нового датчика
+    """
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
 
 
 class SensorView(CreateAPIView):
-    # queryset = Measurement.objects.all()
-    # serializer_class = MeasurementSerializer
 
     def post(self, request):
         Measurement(temperature=35.3, created_at=datetime.datetime.now().time()).save()
