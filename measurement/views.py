@@ -31,6 +31,6 @@ class SensorUpdateView(RetrieveUpdateAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorDetailSerializer
 
-    def patch(self, request, description):
-        Sensor.objects.filter(description=description).update(descr="Перенес датчик на кухню")
+    # def patch(self, request, description):
+    #     Sensor.objects.filter(description=description).update(descr="Перенес датчик на кухню")
 
