@@ -18,18 +18,27 @@ from rest_framework.response import Response
 #     for measurement in measurements:
 #         Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
 #     return HttpResponse("Все получилось!")
+#
+
+
+class AddMeasurement(CreateAPIView):
+    """
+        Ввод показаний датчика
+        """
+    queryset = Measurement.objects.all()
+    serializer_class = MeasurementSerializer
 
 
 class DemoView(ListCreateAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorDetailSerializer
 
-    def post(self, request):
-        Measurement(temperature=22.3, created_at=datetime.datetime.now().time()).save()
-        measurements = Measurement.objects.all()
-        for measurement in measurements:
-            Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
-        return Response("Все получилось!")
+    # def post(self, request):
+    #     Measurement(temperature=22.3, created_at=datetime.datetime.now().time()).save()
+    #     measurements = Measurement.objects.all()
+    #     for measurement in measurements:
+    #         Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
+    #     return Response("Все получилось!")
 
 
 class SensorView(CreateAPIView):
