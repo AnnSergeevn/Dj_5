@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from measurement.views import DemoView, SensorView, SensorUpdateView, create_sensor
+from measurement.views import DemoView, SensorView, SensorUpdateView, create_sensor, create_measurement
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +23,6 @@ urlpatterns = [
     path('sensors/', DemoView.as_view()),
     path('sensor/<pk>/', SensorUpdateView.as_view()),
     path('measurements/', SensorView.as_view()),
-    path('new_sensor/', create_sensor)
+    path('new_sensor/', create_sensor),
+    path("new_measurement", create_measurement),
 ]

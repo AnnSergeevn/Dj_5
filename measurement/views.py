@@ -7,13 +7,17 @@ from measurement.serializers import SensorDetailSerializer, MeasurementSerialize
 from django.http import HttpResponse
 from rest_framework.response import Response
 
-def create_sensor(request):
-    measurements = Measurement.objects.all()
-    for measurement in measurements:
-        Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
-    # measurement = Measurement.objects.filter(temperature=22.3)
-    # Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
-    return HttpResponse("Все получилось!")
+
+# def create_measurement(request):
+#     Measurement(temperature=22.3, created_at=datetime.datetime.now().time()).save()
+#     return HttpResponse("Все получилось!")
+#
+#
+# def create_sensor(request):
+#     measurements = Measurement.objects.all()
+#     for measurement in measurements:
+#         Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
+#     return HttpResponse("Все получилось!")
 
 
 class DemoView(ListCreateAPIView):
@@ -21,6 +25,7 @@ class DemoView(ListCreateAPIView):
     serializer_class = SensorDetailSerializer
 
     def post(self, request):
+        Measurement(temperature=22.3, created_at=datetime.datetime.now().time()).save()
         measurements = Measurement.objects.all()
         for measurement in measurements:
             Sensor.objects.create(name="ESP32", description="Перенес датчик на балкон", measurement=measurement)
